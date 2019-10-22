@@ -7,6 +7,7 @@ mod fetch;
 mod id;
 mod import;
 mod publish;
+mod review;
 mod status;
 
 pub fn run_command(command: Command) -> Result<()> {
@@ -25,6 +26,9 @@ pub fn run_command(command: Command) -> Result<()> {
         }
         Command::Add(args) => {
             add::run_command(&args)?;
+        }
+        Command::Review => {
+            review::run_command()?;
         }
         Command::Status => {
             status::run_command()?;
@@ -56,6 +60,9 @@ pub enum Command {
     /// Stage commits for review
     #[structopt(name = "add")]
     Add(add::Add),
+
+    #[structopt(name = "review")]
+    Review,
 
     #[structopt(name = "status")]
     Status,
